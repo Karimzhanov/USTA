@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AboutTheCommunityConfig(AppConfig):
+class EventsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.about_the_community'
+    name = 'apps.events'

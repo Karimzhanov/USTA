@@ -102,71 +102,24 @@ class TeamMember(models.Model):
         verbose_name = "Член команды"
         verbose_name_plural = "Члены команды"
 
-
-class Ambassador(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название посла")
-    image = models.ImageField(upload_to='ambasador/', verbose_name="Изображение посла")  
-    description = models.TextField(verbose_name="Описание посла") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "Посол"
-        verbose_name_plural = "Послы"
-
-
-class Education(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название образования")
-    image = models.ImageField(upload_to='education/', verbose_name="Изображение образования")  
-    description = models.TextField(verbose_name="Описание образования") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "Образование"
-        verbose_name_plural = "Образования"
+class ContentBlocks(models.Model):
+    CATEGORY_CHOICES = [
+        ('ambassador', 'Посол'),
+        ('education', 'Образование'),
+        ('communities', 'Сообщество'),
+        ('membership', 'Членство'),
+        ('service', 'Услуга'),
+    ]
     
-class Сommunities(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название сообщества")
-    image = models.ImageField(upload_to='communities/', verbose_name="Изображение сообщества")  
-    description = models.TextField(verbose_name="Описание сообщества") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name="Категория")  # Категория контента
+    title = models.CharField(max_length=255, verbose_name="Название")  # Общее название
+    image = models.ImageField(upload_to='content_images/', verbose_name="Изображение")  # Изображение
+    description = models.TextField(verbose_name="Описание")  # Описание
+    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  # Дополнительный текст
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = "Сообщество"
-        verbose_name_plural = "Сообщества"
-
-
-class Membership(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название членства")
-    image = models.ImageField(upload_to='membership/', verbose_name="Изображение членства")  
-    description = models.TextField(verbose_name="Описание членства") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "Членство"
-        verbose_name_plural = "Членства"
-
-
-class Service(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название услуги")
-    image = models.ImageField(upload_to='service/', verbose_name="Изображение услуги")  
-    description = models.TextField(verbose_name="Описание услуги") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "Услуга"
-        verbose_name_plural = "Услуги"
+        verbose_name = "Контентный блок"
+        verbose_name_plural = "Контентные блоки"

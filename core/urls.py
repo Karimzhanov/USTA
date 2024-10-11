@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -21,8 +21,11 @@ schema_view = get_schema_view(
 # Основные URL маршруты проекта
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/base/', include('apps.base.urls')),  # Подключаем маршруты из apps.base.urls
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('api/base/', include('apps.base.urls')),
+    path('api/events/', include('apps.events.urls')),
+    path('api/about_the_community/', include('apps.about_the_community.urls')),
+    path('api/membership/', include('apps.membership.urls')),
+    path('swagger.<str:format>', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
