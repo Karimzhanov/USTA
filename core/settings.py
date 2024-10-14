@@ -54,6 +54,11 @@ INSTALLED_APPS = [
     'apps.about_the_community',
     'apps.events',
     'apps.membership', 
+    'apps.educert', 
+    'apps.service',
+    'apps.ambassadorship',
+    'apps.collaboration',
+    
     
 
 ]
@@ -242,7 +247,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://49cd-158-181-248-104.ngrok-free.app",
     "http://localhost:8000",
     "http://localhost:3000",
-    "http://192.168.31.152",
+    "http://192.168.31.152",    
     "http://172.25.160.1",
 ]
 

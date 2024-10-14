@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Membership(models.Model):
+class Educert(models.Model):
     banner = models.ImageField(
         upload_to='banners/',
         blank=True, null=True,
@@ -18,29 +18,30 @@ class Membership(models.Model):
     def __str__(self):
         return self.title
 
-
     class Meta:
-        verbose_name = "Содержимое Членоствао"
-        verbose_name_plural = "Содержимое Членоство"
+        verbose_name = "Мероприятие страницы"
+        verbose_name_plural = "Мероприятия страниц"
 
-class ContentBlock(models.Model):
+
+
+class Contentblock(models.Model):
     CATEGORY_CHOICES = [
         ('community', 'Преимущества для сообщества'),
         ('events', 'Преимущества для мероприятий'),
         ('suppliers', 'Поставщики'),
         ('partners', 'Партнеры'),
-    ]
+    ]   
     
     category = models.CharField(
-        max_length=50, 
-        choices=CATEGORY_CHOICES, 
+        max_length=50,
+        choices=CATEGORY_CHOICES,
         verbose_name="Категория"
         ) 
     title = models.CharField(
         max_length=255,
         verbose_name="Название"
         )  
-    image = models.ImageField( 
+    image = models.ImageField(
         upload_to='content_images/',
         verbose_name="Изображение", 
         null=True, blank=True
@@ -57,37 +58,28 @@ class ContentBlock(models.Model):
         verbose_name_plural = "Контентные блоки"
 
 
-class Category(models.Model):
+class Videoo(models.Model):
     title = models.CharField(
         max_length=255,
-        verbose_name="Название категории"
-        )
+        verbose_name="Заголовок"
+        )  
+    description = models.TextField(
+        verbose_name="Описание"
+        ) 
+    video_url = models.URLField(
+        max_length=500, 
+        blank=True, null=True,
+        verbose_name="Ссылка на видео"
+        )  
     image = models.ImageField(
-        upload_to='categories/',
-        verbose_name="Изображение категории")    
+        upload_to='content_images/',
+        blank=True, null=True, 
+        verbose_name="Изображение"
+        )
+
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = "Категория"
-        verbose_name_plural = "Категории"
-
-class StepInstruction(models.Model):
-    step_number = models.PositiveIntegerField(
-        verbose_name="Номер шага"
-        )  
-    title = models.CharField(
-        max_length=255, 
-        verbose_name="Заголовок шага"
-        )  
-    description = models.TextField(
-        verbose_name="Описание шага"
-        )  
-
-    
-    def __str__(self):
-        return f"Шаг {self.step_number}: {self.title}"
-
-    class Meta:
-        verbose_name = "Пошаговая инструкция"
-        verbose_name_plural = "Пошаговые инструкции"
+        verbose_name = "Видео"
+        verbose_name_plural = "Видео "

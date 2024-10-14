@@ -1,10 +1,24 @@
 from django.db import models
 
 class PageContent(models.Model):
-    logo = models.ImageField(upload_to='logos/', blank=True, null=True, verbose_name="Логотип")  
-    banner = models.ImageField(upload_to='banners/', blank=True, null=True, verbose_name="Баннер") 
-    title = models.CharField(max_length=255, verbose_name="Заголовок")  
-    description = models.TextField(verbose_name="Описание") 
+    logo = models.ImageField(
+        upload_to='logos/',
+        blank=True, null=True,
+        verbose_name="Логотип"
+        )
+      
+    banner = models.ImageField(
+        upload_to='banners/',
+        blank=True, null=True,
+        verbose_name="Баннер"
+        ) 
+    title = models.CharField(
+        max_length=255,
+        verbose_name="Заголовок"
+        )  
+    description = models.TextField(
+        verbose_name="Описание"
+        ) 
 
     def __str__(self):
         return self.title
@@ -15,10 +29,23 @@ class PageContent(models.Model):
 
 
 class ContentBlock(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок")
-    description = models.TextField(blank=True, null=True, verbose_name="Описание")
-    date = models.DateField(blank=True, null=True, verbose_name="Дата")
-    image = models.ImageField(upload_to='content_images/', blank=True, null=True, verbose_name="Изображение")
+    title = models.CharField(
+        max_length=255, 
+        verbose_name="Заголовок"
+        )
+    description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Описание"
+        )
+    date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Дата"
+        )
+    image = models.ImageField(
+        upload_to='content_images/', 
+        blank=True, null=True,
+        verbose_name="Изображение"
+        )
 
     def __str__(self):
         return self.title
@@ -29,8 +56,14 @@ class ContentBlock(models.Model):
 
 
 class Partner(models.Model):
-    logo = models.ImageField(upload_to='partner_logos/', verbose_name="Логотип партнёра")
-    name = models.CharField(max_length=255, verbose_name="Название партнёра")
+    logo = models.ImageField(
+        upload_to='partner_logos/',
+        verbose_name="Логотип партнёра"
+        )
+    name = models.CharField(
+        max_length=255,
+        verbose_name="Название партнёра"
+        )
 
     def __str__(self):
         return self.name
@@ -41,8 +74,17 @@ class Partner(models.Model):
 
 
 class EventImage(models.Model):
-    image = models.ImageField(upload_to='event_images/', verbose_name="Изображение мероприятия")  
-    event = models.ForeignKey('Event', related_name='images', on_delete=models.CASCADE, verbose_name="Мероприятие")
+    image = models.ImageField(
+        upload_to='event_images/', 
+        verbose_name="Изображение мероприятия"
+        )  
+    
+    event = models.ForeignKey(
+        'Event', 
+        related_name='images',
+        on_delete=models.CASCADE, 
+        verbose_name="Мероприятие"
+        )
 
     def __str__(self):
         return f"Image for {self.event.title}"
@@ -53,9 +95,17 @@ class EventImage(models.Model):
 
 
 class Event(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок мероприятия") 
-    description = models.TextField(verbose_name="Описание мероприятия")
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
+    title = models.CharField(
+        max_length=255,
+        verbose_name="Заголовок мероприятия"
+        ) 
+    description = models.TextField(
+        verbose_name="Описание мероприятия"
+        )
+    additional_text = models.TextField(
+        blank=True, null=True,
+        verbose_name="Дополнительный текст"
+        )  
 
     def __str__(self):
         return self.title
@@ -66,8 +116,16 @@ class Event(models.Model):
 
 
 class ProjectImage(models.Model):
-    image = models.ImageField(upload_to='project_images/', verbose_name="Изображение проекта")
-    project = models.ForeignKey('ProjectParticipation', related_name='images', on_delete=models.CASCADE, verbose_name="Проект")
+    image = models.ImageField(
+        upload_to='project_images/', 
+        verbose_name="Изображение проекта"
+        )
+    project = models.ForeignKey(
+        'ProjectParticipation', 
+        related_name='images',
+        on_delete=models.CASCADE, 
+        verbose_name="Проект"
+        )
 
     def __str__(self):
         return f"Image for {self.project.title}"
@@ -78,9 +136,17 @@ class ProjectImage(models.Model):
 
 
 class ProjectParticipation(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок проекта") 
-    description = models.TextField(verbose_name="Описание проекта") 
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  
+    title = models.CharField(
+        max_length=255,
+        verbose_name="Заголовок проекта"
+        ) 
+    description = models.TextField(
+        verbose_name="Описание проекта"
+        ) 
+    additional_text = models.TextField(
+        blank=True, null=True, 
+        verbose_name="Дополнительный текст"
+        )  
 
     def __str__(self):
         return self.title
@@ -91,9 +157,18 @@ class ProjectParticipation(models.Model):
     
 
 class TeamMember(models.Model):
-    full_name = models.CharField(max_length=255, verbose_name="ФИО")  
-    position = models.CharField(max_length=255, verbose_name="Должность")  
-    photo = models.ImageField(upload_to='team_photos/', verbose_name="Фото") 
+    full_name = models.CharField(
+        max_length=255,
+        verbose_name="ФИО"
+        )  
+    position = models.CharField(
+        max_length=255,
+        verbose_name="Должность"
+        )  
+    photo = models.ImageField(
+        upload_to='team_photos/', 
+        verbose_name="Фото"
+        ) 
 
     def __str__(self):
         return self.full_name
@@ -111,11 +186,26 @@ class ContentBlocks(models.Model):
         ('service', 'Услуга'),
     ]
     
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name="Категория")  # Категория контента
-    title = models.CharField(max_length=255, verbose_name="Название")  # Общее название
-    image = models.ImageField(upload_to='content_images/', verbose_name="Изображение")  # Изображение
-    description = models.TextField(verbose_name="Описание")  # Описание
-    additional_text = models.TextField(blank=True, null=True, verbose_name="Дополнительный текст")  # Дополнительный текст
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        verbose_name="Категория"
+        )
+    title = models.CharField(
+        max_length=255,
+        verbose_name="Название"
+        ) 
+    image = models.ImageField(
+        upload_to='content_images/',
+        verbose_name="Изображение"
+        ) 
+    description = models.TextField(
+        verbose_name="Описание"
+        )  
+    additional_text = models.TextField(
+        blank=True, null=True, 
+        verbose_name="Дополнительный текст"
+        )  
 
     def __str__(self):
         return self.title
