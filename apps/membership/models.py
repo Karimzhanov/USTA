@@ -91,3 +91,4 @@ class StepInstruction(models.Model):
     class Meta:
         verbose_name = "Пошаговая инструкция"
         verbose_name_plural = "Пошаговые инструкции"
+
